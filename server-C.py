@@ -6,18 +6,28 @@ def sumFunc(c, addr):
     n = n + 1
     print('Number of Connected Clients:', n)
     while True:
-        c.sendall('You are Connected to Server!'.encode('ascii'))
-        num1 = c.recv(1024)
-        if num1 == b'DONE':
-            print('Client at', addr[0], ':', addr[1], 'Disconnected!')
+        c.sendall('You are Connected to Server-C!'.encode('ascii'))
+        try:
+            c.settimeout(10.0)
+            num1 = c.recv(1024)
+        except:
+            print('Client at', addr[0], ':', addr[1], 'is Not Responding!')
             n = n - 1
             print('Number of Connected Clients:', n)
             break
-        num1 = int(num1)
-        num2 = int(c.recv(1024))
-        num = num1 + num2
-        print(num1, ' + ', num2, ' = ', num)
-        c.sendall(str(num).encode('ascii'))
+        if num1:
+            if num1 == b'DONE':
+                print('Client at', addr[0], ':', addr[1], 'Disconnected!')
+                n = n - 1
+                print('Number of Connected Clients:', n)
+                break
+            num1 = int(num1)
+            num2 = int(c.recv(1024))
+            num = num1 + num2
+            print(num1, ' + ', num2, ' = ', num)
+            c.sendall(str(num).encode('ascii'))
+        else:
+            print("nothig recieved!")
 
     c.close()
 

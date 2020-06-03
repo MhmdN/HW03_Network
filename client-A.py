@@ -1,8 +1,8 @@
 import socket
 
-host = '127.0.0.1'
-port = 12346
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+host = "localhost"
+port = 12345
+s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 s.connect((host, port))
 while True:
     num = str(s.recv(1024).decode('ascii'))

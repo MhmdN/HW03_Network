@@ -6,7 +6,7 @@ def sumFunc(c, addr):
     n = n + 1
     print('Number of Connected Clients:', n)
     while True:
-        c.sendall('You are Connected to Server!'.encode('ascii'))
+        c.sendall('You are Connected to Server-A!'.encode('ascii'))
         num1 = c.recv(1024)
         if num1 == b'DONE':
             print('Client at', addr[0], ':', addr[1], 'Disconnected!')
@@ -25,7 +25,7 @@ def sumFunc(c, addr):
 n = 0
 host = "localhost"
 port = 12345
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s = socket.socket(socket.AF_INET6, socket.SOCK_STREAM)
 s.bind((host, port))
 print('Socket Binded on port:', port)
 s.listen()
